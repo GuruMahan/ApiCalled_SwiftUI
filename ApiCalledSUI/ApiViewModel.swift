@@ -7,11 +7,11 @@
 
 import Foundation
 class ApiViewModel: ObservableObject {
+    
     @Published var isSelected:innerData?
     @Published var dataList : ApiModel?
-    var link = "https://datausa.io/api/data?drilldowns=Nation&measures=Population"
-    
     var jsonvalue = [innerData]()
+    var link = "https://datausa.io/api/data?drilldowns=Nation&measures=Population"
     
     func loadData() async {
         guard let url = URL(string: link) else{print("Invalid URL")
@@ -25,12 +25,9 @@ class ApiViewModel: ObservableObject {
                     self.dataList = decodedResponse
                     print(self.jsonvalue)
                 }
-                
             }
-            
         }catch{
             print("Invalid data")
         }
     }
-    
 }

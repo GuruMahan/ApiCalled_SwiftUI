@@ -9,10 +9,7 @@ import Foundation
 
 struct ApiModel: Codable {
     let data: [innerData]
-   // let source: [Source]
-    
 }
-
 
 // MARK: - innerData
 struct innerData: Codable {
@@ -22,7 +19,7 @@ struct innerData: Codable {
     let year: String
     let population: Int
     let slugNation: String
-
+    
     enum CodingKeys: String, CodingKey {
         case idNation = "ID Nation"
         case nation = "Nation"
@@ -33,12 +30,11 @@ struct innerData: Codable {
     }
 }
 
- // MARK: - Source
+// MARK: - Source
 struct Source: Codable {
     let measures: [String]
     let annotations: Annotations
     let name: String
-    //let substitutions: String
 }
 
 // MARK: - Annotations
@@ -46,7 +42,7 @@ struct Annotations: Codable {
     let sourceName, sourceDescription, datasetName: String
     let datasetLink: String
     let tableID, topic, subtopic: String
-
+    
     enum CodingKeys: String, CodingKey {
         case sourceName = "source_name"
         case sourceDescription = "source_description"

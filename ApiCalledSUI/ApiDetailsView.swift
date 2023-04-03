@@ -8,17 +8,17 @@
 import SwiftUI
 
 struct ApiDetailsView: View {
+    
     @ObservedObject var viewModel = ApiViewModel()
     let model: innerData?
-   var population1 : ApiModel?
-   
+    var population1 : ApiModel?
+    
     var body: some View {
         ZStack{
             VStack{
                 Text("\(model?.population ?? 0)")
                 Text(model?.idNation ?? "")
                 Text(model?.nation ?? "")
-                
             }
         }
     }

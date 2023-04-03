@@ -8,82 +8,58 @@
 import SwiftUI
 
 struct ApiCalledView: View {
+    
     @ObservedObject var viewModel = ApiViewModel()
     @State var result = [innerData]()
     @State var nextPage = false
-    //@State var apiDetailView = ApiDetailsView()
-  
-   
+    
     var body: some View {
         NavigationStack{
             ScrollView{
-                
                 ZStack{
-                    
                     LinearGradient(colors: [Color.green.opacity(0.2)], startPoint:.trailing, endPoint: .leading)
-                    
-                        
                     VStack {
-                      Image(systemName:"book")
+                        Image(systemName:"book")
                             .fontWeight(.bold)
                             .frame(height: 100)
-                            
                         Spacer()
                         VStack{
-                            
                             ForEach(0..<(viewModel.dataList?.data.count ?? 0), id:\.self) { result in
-                               
-
                                 apiListView(list: viewModel.jsonvalue[result])
-                                   
-                                
                             }
-                            
                         }
-                        
                     }
-                    
                 }
-                 .cornerRadius(10)
-               
+                .cornerRadius(10)
             }
             .navigationDestination(isPresented: $nextPage){
                 ApiDetailsView(model: viewModel.isSelected)
-                        .navigationBarTitleDisplayMode(.automatic)
-                        .navigationBarBackButtonHidden(false)
-            
-                    }
+                    .navigationBarTitleDisplayMode(.automatic)
+                    .navigationBarBackButtonHidden(false)
+            }
             .task{
                 await viewModel.loadData()
             }
-          
         }
-        
     }
     
     @ViewBuilder func apiListView(list: innerData?) -> some View{
-        
         ZStack {
-            
             HStack() {
                 VStack(alignment:.leading){
                     HStack{
                         Text("Population:\(list?.population ?? 0)")
                             .fontWeight(.bold)
-                           
                             .padding(.leading)
-                           Spacer()
+                        Spacer()
                         Button{
                             viewModel.isSelected = list
                             nextPage = true
                         } label: {
-                            
                             Image(systemName: "chevron.forward.2")
                                 .foregroundColor(.black)
                                 .padding()
-                              
                         }
-                        
                     }
                     Text("NationID:\(list?.idNation ?? "") ")
                         .font(Font.subheadline)
@@ -101,26 +77,12 @@ struct ApiCalledView: View {
                         .padding(.leading)
                     Divider()
                 }
-                
-//                Spacer()
-//                VStack(alignment:.leading){
-//                    Text("\(list?.population ?? 0 )")
-//
-//                    Text("\(list?.idNation ?? "") ")
-//                }
                 Spacer()
-               
             }
-            
         }
-        
         .frame(maxWidth: .infinity,maxHeight: .infinity)
-        
     }
-    
-    
 }
-
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
